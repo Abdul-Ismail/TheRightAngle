@@ -10,6 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var capturePhoto_TouchUpInside: UIButton!
+    
+    @IBAction func capturePhotoButton(_ sender: Any) {
+        performSegue(withIdentifier: "capturePhoto_Segue", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

@@ -12,6 +12,7 @@
 		7B2C6D5B1F640CE3000A40D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C6D591F640CE3000A40D2 /* Main.storyboard */; };
 		7B2C6D5D1F640CE3000A40D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C6D5C1F640CE3000A40D2 /* Assets.xcassets */; };
 		7B2C6D601F640CE3000A40D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C6D5E1F640CE3000A40D2 /* LaunchScreen.storyboard */; };
+		7B2C6D681F64104E000A40D2 /* CapturedPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C6D671F64104E000A40D2 /* CapturedPictureViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		7B2C6D5C1F640CE3000A40D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B2C6D5F1F640CE3000A40D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B2C6D611F640CE3000A40D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B2C6D671F64104E000A40D2 /* CapturedPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturedPictureViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				7B2C6D5C1F640CE3000A40D2 /* Assets.xcassets */,
 				7B2C6D5E1F640CE3000A40D2 /* LaunchScreen.storyboard */,
 				7B2C6D611F640CE3000A40D2 /* Info.plist */,
+				7B2C6D671F64104E000A40D2 /* CapturedPictureViewController.swift */,
 			);
 			path = TheRightAngle;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B2C6D581F640CE3000A40D2 /* ViewController.swift in Sources */,
+				7B2C6D681F64104E000A40D2 /* CapturedPictureViewController.swift in Sources */,
 				7B2C6D561F640CE3000A40D2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
