@@ -21,6 +21,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FPf-Wf-T0r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evg-kB-yB0">
                                 <rect key="frame" x="162" y="597" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,6 +41,18 @@
                                     <action selector="capturePhotoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FNW-Em-fPc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D21-ae-msf">
+                                <rect key="frame" x="299" y="28" width="47" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Switch"/>
+                                <connections>
+                                    <action selector="switchCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EAk-Sr-Aj8"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qMy-Di-VGD">
+                                <rect key="frame" x="16" y="576" width="110" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -45,13 +61,15 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundPhoto" destination="FPf-Wf-T0r" id="NI4-Dy-hEj"/>
                         <outlet property="capturePhoto_TouchUpInside" destination="evg-kB-yB0" id="jg7-hy-TCH"/>
+                        <outlet property="pickTransparentPhoto" destination="qMy-Di-VGD" id="KNM-mh-3Wr"/>
                         <segue destination="UUy-uj-KaE" kind="presentation" identifier="capturePhoto_Segue" id="S0g-Il-0Aj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="220" y="37"/>
+            <point key="canvasLocation" x="220" y="36.431784107946029"/>
         </scene>
         <!--Captured Picture View Controller-->
         <scene sceneID="w36-zi-eJp">

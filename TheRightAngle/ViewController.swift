@@ -10,6 +10,9 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
+    @IBOutlet weak var backgroundPhoto: UIImageView!
+        @IBOutlet weak var pickTransparentPhoto: UIImageView!
+    
     
     var captureSession = AVCaptureSession() //input and output
     var backCamera: AVCaptureDevice?
@@ -34,6 +37,22 @@ class ViewController: UIViewController {
         setupInputOutput()
         setupPreviewLayer()
         startRunningCaptureSession()
+        
+        //allowing the image view to recognize gestures to replicate a button functionality
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleSelectBackgroundImage))
+        pickTransparentPhoto.addGestureRecognizer(tapGesture)
+        pickTransparentPhoto.isUserInteractionEnabled = true
+        
+    }
+    
+    func handleSelectBackgroundImage() {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        present(pickerController, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func switchCamera(_ sender: Any) {
         
     }
     
@@ -92,15 +111,31 @@ class ViewController: UIViewController {
             previewVC.capturedPicture = self.capturedPicture
         }
     }
+
+    
+    
     
 }
 
-extension ViewController: AVCapturePhotoCaptureDelegate {
+extension ViewController: AVCapturePhotoCaptureDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let imageData = photo.fileDataRepresentation() {
             capturedPicture = UIImage(data: imageData)
             performSegue(withIdentifier: "capturePhoto_Segue", sender: nil)
         }
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+
+        if let pickedBackground = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            backgroundPhoto.image = pickedBackground
+            print("DASDASD")
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
 }
+
+
 
