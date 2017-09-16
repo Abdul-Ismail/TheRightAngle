@@ -20,12 +20,10 @@ class ViewController: UIViewController {
     
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
+    var capturedPicture: UIImage?
+    
     
     @IBOutlet weak var capturePhoto_TouchUpInside: UIButton!
-    
-    @IBAction func capturePhotoButton(_ sender: Any) {
-        performSegue(withIdentifier: "capturePhoto_Segue", sender: self)
-    }
     
     
     override func viewDidLoad() {
@@ -82,5 +80,27 @@ class ViewController: UIViewController {
         captureSession.startRunning()
     }
     
+    @IBAction func capturePhotoButton(_ sender: Any) {
+        let settings = AVCapturePhotoSettings()
+        photoOutput?.capturePhoto(with: settings, delegate: self)
+        // performSegue(withIdentifier: "showPhoto_Segue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "capturePhoto_Segue" {
+            let previewVC = segue.destination as! CapturedPictureViewController
+            previewVC.capturedPicture = self.capturedPicture
+        }
+    }
+    
+}
+
+extension ViewController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let imageData = photo.fileDataRepresentation() {
+            capturedPicture = UIImage(data: imageData)
+            performSegue(withIdentifier: "capturePhoto_Segue", sender: nil)
+        }
+    }
 }
 

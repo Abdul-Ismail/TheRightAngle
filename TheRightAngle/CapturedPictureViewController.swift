@@ -9,20 +9,26 @@
 import UIKit
 
 class CapturedPictureViewController: UIViewController {
+    
+    var capturedPicture: UIImage!
 
     @IBOutlet weak var saveButton_TouchUpInside: UIButton!
     @IBOutlet weak var cancelButton_TouchUpInside: UIButton!
     @IBOutlet weak var capturedPhoto: UIImageView!
     
-    var takenPhoto:UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let availableImage = takenPhoto {
-            capturedPhoto.image = availableImage
-        }
+        
+            capturedPhoto.image = capturedPicture
         
     }
-
+    @IBAction func savePhoto(_ sender: Any) {
+        //UIImageWriteToSavedPhotosAlbum(capturedPicture, nil, nil, nil)
+        //dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelPhoto(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
