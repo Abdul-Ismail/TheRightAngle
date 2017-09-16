@@ -267,6 +267,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = N73X6W7Y98;
 				INFOPLIST_FILE = TheRightAngle/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Abdulaziz-Ismail.TheRightAngle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -280,6 +281,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = N73X6W7Y98;
 				INFOPLIST_FILE = TheRightAngle/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Abdulaziz-Ismail.TheRightAngle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -306,6 +308,7 @@
 				7B2C6D661F640CE3000A40D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
