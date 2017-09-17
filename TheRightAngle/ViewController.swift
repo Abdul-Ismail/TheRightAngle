@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
     var capturedPicture: UIImage?
+    var transparentPhoto: UIImage?
     
     
     @IBOutlet weak var capturePhoto_TouchUpInside: UIButton!
@@ -109,9 +110,14 @@ class ViewController: UIViewController {
         if segue.identifier == "capturePhoto_Segue" {
             let previewVC = segue.destination as! CapturedPictureViewController
             previewVC.capturedPicture = self.capturedPicture
+            previewVC.transparentPhoto = self.transparentPhoto
         }
     }
 
+    @IBAction func changeTransparency(_ sender: UISlider) {
+        backgroundPhoto.alpha = CGFloat(sender.value)
+        print(sender.value)
+    }
     
     
     
@@ -129,6 +135,7 @@ extension ViewController: AVCapturePhotoCaptureDelegate, UIImagePickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
         if let pickedBackground = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            transparentPhoto = pickedBackground
             backgroundPhoto.image = pickedBackground
             print("DASDASD")
         }

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,6 +52,13 @@
                                 <rect key="frame" x="16" y="576" width="110" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rWy-ua-eM7">
+                                <rect key="frame" x="36" y="533" width="302" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="changeTransparency:" destination="BYZ-38-t0r" eventType="valueChanged" id="tBq-37-nKG"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -119,6 +125,10 @@
                                     <constraint firstAttribute="height" constant="70" id="zDk-5h-jKz"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Aq-5r-beQ">
+                                <rect key="frame" x="67" y="144" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -135,6 +145,7 @@
                         <outlet property="cancelButton_TouchUpInside" destination="tyd-4P-HNw" id="0DG-aw-TAM"/>
                         <outlet property="capturedPhoto" destination="QIU-QI-7Sa" id="9fV-YU-PeP"/>
                         <outlet property="saveButton_TouchUpInside" destination="ymz-2N-HrS" id="d33-Nl-bjM"/>
+                        <outlet property="transparentPhotoView" destination="6Aq-5r-beQ" id="n6Q-No-wcb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAK-DI-4YL" userLabel="First Responder" sceneMemberID="firstResponder"/>
