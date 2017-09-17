@@ -32,19 +32,11 @@ class CapturedPictureViewController: UIViewController {
         transparentPhotoView.image = transparentPhoto
         //capturedPhoto.alpha = 1
         transparentPhotoView.alpha = 0
-        
-
-
 
     }
     
     func test() {
-//
-//        UIView.transition(with: self.capturedPhoto,
-//                          duration:1,
-//                          options: .transitionCrossDissolve,
-//                          animations: { self.capturedPhoto.image = self.transparentPhoto },
-//                          completion: nil)
+
        transition(fromPhoto: self.capturedPhoto, toTransparent: self.transparentPhoto, toCaptured: self.capturedPicture)
         
 
@@ -54,14 +46,13 @@ class CapturedPictureViewController: UIViewController {
 
     if !started {
             started = true
-        print("SSSSSSS")
+
            if changeToTransparent {
            UIView.transition(with: fromPhoto,
                           duration: 1, options:
                         .transitionCrossDissolve,
                           animations: { fromPhoto.image = toTransparent
         }, completion: { (value: Bool) in
-                            print("changed to false")
             self.changeToTransparent = false
             self.started = false
                         })
@@ -95,7 +86,21 @@ class CapturedPictureViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("END")
         touching = false
+        
+        var bounds = UIScreen.main.bounds
+        var width = bounds.size.width
+        var height = bounds.size.height
+        print(width, height)
     }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let position = touch.location(in: view)
+            print(position)
+        }
+
+    }
+
     
 
     @IBAction func savePhoto(_ sender: Any) {

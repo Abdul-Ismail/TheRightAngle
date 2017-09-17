@@ -19,6 +19,12 @@ class ViewController: UIViewController {
     var frontCamera: AVCaptureDevice?
     var currentCamera: AVCaptureDevice?
     
+    enum CameraDirection {
+        case front
+        case back
+    }
+    var currentDirection: CameraDirection = .front//or initial direction
+    
     var photoOutput: AVCapturePhotoOutput?
     
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -62,18 +68,19 @@ class ViewController: UIViewController {
     }
     
     func setupDevice() {
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaTypeVideo, position: AVCaptureDevice.Position.unspecified)
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaTypeVideo, position: AVCaptureDevice.Position.back)
         let devices = deviceDiscoverySession?.devices
         
         for device in devices! {
             if device.position == AVCaptureDevice.Position.back {
-                backCamera = device
+                currentCamera = device
             } else if device.position == AVCaptureDevice.Position.front {
-                frontCamera = device
+                currentCamera = device
             }
         }
         
-        currentCamera = backCamera
+        //currentCamera = backCamera
+        
     }
     
     func setupInputOutput() {
@@ -90,7 +97,7 @@ class ViewController: UIViewController {
     
     func setupPreviewLayer() {
         cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        cameraPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        cameraPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspect
         cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
         cameraPreviewLayer?.frame = self.view.frame
         self.view.layer.insertSublayer(cameraPreviewLayer!, at: 0)
@@ -120,8 +127,54 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func changeCamera(_ sender: Any) {
+
+        if (currentDirection == .front) {
+            currentDirection = .back
+        } else {
+            currentDirection = .front
+        }
+        
+        print(currentDirection)
+        
+        //captureSession.stopRunning()
+        captureSession = AVCaptureSession() //input and output
+//        setupCaptureSession()
+//        setupDevice()
+//        setupInputOutput()
+//        setupPreviewLayer()
+//        startRunningCaptureSession()
+        
+    }
+    
+
+    @IBAction func flashToggleAction(_ sender: Any) {
+        toggleFlash()
+    }
+    
+    func toggleFlash() {
+        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        if (device?.hasTorch)! {
+            do {
+                try device?.lockForConfiguration()
+                if (device?.torchMode == AVCaptureTorchMode.on) {
+                    device?.torchMode = AVCaptureTorchMode.off
+                } else {
+                    do {
+                        try device?.setTorchModeOnWithLevel(1.0)
+                    } catch {
+                        print(error)
+                    }
+                }
+                device?.unlockForConfiguration()
+            } catch {
+                print(error)
+            }
+        }
+    }
     
 }
+
 
 extension ViewController: AVCapturePhotoCaptureDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
