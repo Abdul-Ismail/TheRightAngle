@@ -12,6 +12,11 @@ class CapturedPictureViewController: UIViewController {
     
     var capturedPicture: UIImage!
     var transparentPhoto: UIImage!
+    
+    var bounds = UIScreen.main.bounds
+    var widthMiddle: CGFloat!
+    var heightMidle: CGFloat!
+    var touchedAt: CGPoint!
 
     @IBOutlet weak var saveButton_TouchUpInside: UIButton!
     @IBOutlet weak var cancelButton_TouchUpInside: UIButton!
@@ -19,7 +24,7 @@ class CapturedPictureViewController: UIViewController {
     
     @IBOutlet weak var transparentPhotoView: UIImageView!
     
-    var touching = true
+    var touching = false
     var started = false
     var changeToTransparent = true
     var i: CGFloat = 0.1
@@ -27,10 +32,12 @@ class CapturedPictureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        widthMiddle = bounds.size.width/2
+        heightMidle = bounds.size.height/2
         
         capturedPhoto.image = capturedPicture
         transparentPhotoView.image = transparentPhoto
-        //capturedPhoto.alpha = 1
+        capturedPhoto.alpha = 1
         transparentPhotoView.alpha = 0
 
     }
@@ -38,10 +45,9 @@ class CapturedPictureViewController: UIViewController {
     func test() {
 
        transition(fromPhoto: self.capturedPhoto, toTransparent: self.transparentPhoto, toCaptured: self.capturedPicture)
-        
-
     }
-    
+
+    //transitions between the two photos
     func transition(fromPhoto: UIImageView, toTransparent: UIImage?, toCaptured: UIImage? ) {
 
     if !started {
@@ -77,27 +83,35 @@ class CapturedPictureViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("START")
-        test()
-        touching = true
-        //changePhoto()
+        
+        //get points of where was touched first
+        if let touch = touches.first {
+            touchedAt = touch.location(in: view)
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("END")
-        touching = false
-        
-        var bounds = UIScreen.main.bounds
-        var width = bounds.size.width
-        var height = bounds.size.height
-        print(width, height)
+        //reseting alpha value once not touching anymore
+        capturedPhoto.alpha = 1
+        transparentPhotoView.alpha = 0
+
+    }
+    
+    func updateViewAlpha(distance: Float) {
+        capturedPhoto.alpha = 1 - CGFloat(distance * 0.0030)
+        transparentPhotoView.alpha = CGFloat(distance * 0.0035)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        //getting distance from touched point and dragged point and using that for alpha value
         if let touch = touches.first {
             let position = touch.location(in: view)
             print(position)
-        }
+            var distance = hypotf(Float(touchedAt.x - position.x), Float(touchedAt.y - position.y));
+            updateViewAlpha(distance: distance)
+            
+          }
 
     }
 
