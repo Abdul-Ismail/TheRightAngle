@@ -32,6 +32,27 @@ class ViewController: UIViewController {
     var capturedPicture: UIImage?
     var transparentPhoto: UIImage?
     
+    enum SliderAppearance {
+        case up
+        case down
+    }
+    var currentSliderAppearance: SliderAppearance = .down
+    
+    @IBOutlet weak var TransparencySlider: UISlider!
+    @IBOutlet weak var popUpDown: UIButton!
+    
+    @IBAction func popUpDownAction(_ sender: Any) {
+        if (currentSliderAppearance == .down) {
+            currentSliderAppearance = .up
+            TransparencySlider.isHidden = false
+            popUpDown.setImage(UIImage.init(named: "popDown"), for: .normal)
+        } else {
+            currentSliderAppearance = .down
+            TransparencySlider.isHidden = true
+            popUpDown.setImage(UIImage.init(named: "popUp"), for: .normal)
+        }
+        
+    }
     
     @IBOutlet weak var capturePhoto_TouchUpInside: UIButton!
     
@@ -45,6 +66,8 @@ class ViewController: UIViewController {
         setupPreviewLayer()
         startRunningCaptureSession()
         
+        TransparencySlider.isHidden = true
+        
         //allowing the image view to recognize gestures to replicate a button functionality
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleSelectBackgroundImage))
         pickTransparentPhoto.addGestureRecognizer(tapGesture)
@@ -53,9 +76,12 @@ class ViewController: UIViewController {
     }
     
     func handleSelectBackgroundImage() {
+                  DispatchQueue.global().async {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        present(pickerController, animated: true, completion: nil)
+                    
+        self.present(pickerController, animated: true, completion: nil)
+        }
     }
     
     
@@ -108,9 +134,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func capturePhotoButton(_ sender: Any) {
-        let settings = AVCapturePhotoSettings()
-        photoOutput?.capturePhoto(with: settings, delegate: self)
-        // performSegue(withIdentifier: "showPhoto_Segue", sender: nil)
+          DispatchQueue.global().async {
+            let settings = AVCapturePhotoSettings()
+            self.photoOutput?.capturePhoto(with: settings, delegate: self)
+               DispatchQueue.main.async {
+            }
+        }
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -123,7 +153,6 @@ class ViewController: UIViewController {
 
     @IBAction func changeTransparency(_ sender: UISlider) {
         backgroundPhoto.alpha = CGFloat(sender.value)
-        print(sender.value)
     }
     
     
