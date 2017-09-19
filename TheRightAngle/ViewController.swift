@@ -38,6 +38,11 @@ class ViewController: UIViewController {
     }
     var currentSliderAppearance: SliderAppearance = .down
     
+
+
+    @IBOutlet weak var pickFromGallery: UIImageView!
+    @IBOutlet weak var toggleFlashButton: UIButton!
+    @IBOutlet weak var switchCamera: UIButton!
     @IBOutlet weak var TransparencySlider: UISlider!
     @IBOutlet weak var popUpDown: UIButton!
     
@@ -67,6 +72,12 @@ class ViewController: UIViewController {
         startRunningCaptureSession()
         
         TransparencySlider.isHidden = true
+        
+        //
+        let image = UIImage(named: "gallery")!.withRenderingMode(.alwaysTemplate)
+        pickFromGallery.image = image
+        pickFromGallery.tintColor = UIColor.white
+
         
         //allowing the image view to recognize gestures to replicate a button functionality
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleSelectBackgroundImage))

@@ -118,8 +118,8 @@ class CapturedPictureViewController: UIViewController {
     
 
     @IBAction func savePhoto(_ sender: Any) {
-        //UIImageWriteToSavedPhotosAlbum(capturedPicture, nil, nil, nil)
-        //dismiss(animated: true, completion: nil)
+        UIImageWriteToSavedPhotosAlbum(capturedPicture, nil, nil, nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelPhoto(_ sender: Any) {
